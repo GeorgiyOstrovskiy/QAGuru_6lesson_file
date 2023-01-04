@@ -11,6 +11,3 @@ def create_archive():
             if file.endswith('.zip'):
                 continue
             zippfile.write(os.path.join(resources_dir, file))
-        print(zippfile.namelist())
-
-create_archive()
