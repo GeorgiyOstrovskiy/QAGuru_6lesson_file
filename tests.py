@@ -13,7 +13,7 @@ archive_dir = os.path.join(resources_dir, 'testzip.zip')
 
 def test_csv_file():
     with ZipFile(archive_dir) as zippfile:
-        csvfile_dir = zippfile.extract(zippfile.namelist()[2])
+        csvfile_dir = zippfile.extract(zippfile.namelist()[3])
         with open(csvfile_dir) as csvfile:
             csvfile = csv.reader(csvfile)
             csvread = []
@@ -25,7 +25,7 @@ def test_csv_file():
 
 def test_pdf_file():
     with ZipFile(archive_dir) as zippfile:
-        pdffile_dir = zippfile.extract(zippfile.namelist()[1])
+        pdffile_dir = zippfile.extract(zippfile.namelist()[0])
         pdffile = PdfReader(pdffile_dir)
         page = pdffile.pages[2]
         text = page.extract_text()
@@ -34,7 +34,7 @@ def test_pdf_file():
 
 def test_xlsx_file():
     with ZipFile(archive_dir) as zippfile:
-        xlsxfile_dir = zippfile.extract(zippfile.namelist()[0])
+        xlsxfile_dir = zippfile.extract(zippfile.namelist()[1])
         workbook = load_workbook(xlsxfile_dir)
         sheet = workbook.active
         check_value = sheet.cell(row=37, column=3).value
@@ -43,7 +43,6 @@ def test_xlsx_file():
 
 def test_image_file():
     with ZipFile(archive_dir) as zippfile:
-        imagefile_dir = zippfile.extract(zippfile.namelist()[0])
+        imagefile_dir = zippfile.extract(zippfile.namelist()[2])
         check_size = os.path.getsize(imagefile_dir)
-        print(check_size)
-        assert check_size == 7360
+        assert check_size == 7232
